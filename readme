@@ -1,0 +1,6 @@
+#CREATE LAYER COVERAGE @ GEOSERVER
+
+SELECT
+  gid AS id,
+  geom
+FROM v_wifi_coverage

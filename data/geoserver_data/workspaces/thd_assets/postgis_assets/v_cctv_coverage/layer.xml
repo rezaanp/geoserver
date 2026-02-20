@@ -1,0 +1,17 @@
+<layer>
+  <name>v_cctv_coverage</name>
+  <id>LayerInfoImpl--12781125:19c526f9e68:-7fff</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-5ea5325b:19c5f532b02:-7b1b</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--12781125:19c526f9e68:-8000</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2026-02-12 15:19:32.986 UTC</dateCreated>
+  <dateModified>2026-02-15 12:42:24.688 UTC</dateModified>
+</layer>

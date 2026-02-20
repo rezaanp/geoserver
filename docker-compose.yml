@@ -1,0 +1,35 @@
+services:
+  postgis:
+    image: postgis/postgis:15-3.4
+    container_name: postgis
+    environment:
+      - POSTGRES_DB=spatial_assets
+      - POSTGRES_USER=geoadmin
+      - POSTGRES_PASSWORD=SecurePass123!
+    volumes:
+      - ./data/postgis:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
+    networks:
+      - geospatial-net
+    restart: unless-stopped
+
+  geoserver:
+    image: docker.osgeo.org/geoserver:2.24.2
+    container_name: geoserver
+    depends_on:
+      - postgis
+    environment:
+      TZ: Asia/Jakarta
+    volumes:
+      - ./data/geoserver_data:/opt/geoserver_data
+    ports:
+      - "8080:8080"
+    networks:
+      - geospatial-net
+    restart: unless-stopped
+
+networks:
+  geospatial-net:
+    driver: bridge

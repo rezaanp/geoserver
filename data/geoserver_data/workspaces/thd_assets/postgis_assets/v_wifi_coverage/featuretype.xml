@@ -1,0 +1,57 @@
+<featureType>
+  <id>FeatureTypeInfoImpl--66ab81fb:19c54a0cad5:-6dcf</id>
+  <name>v_wifi_coverage</name>
+  <nativeName>v_wifi_coverage</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl-72bef690:19c483c603a:-7fff</id>
+  </namespace>
+  <title>v_wifi_coverage</title>
+  <keywords>
+    <string>features</string>
+    <string>v_wifi_coverage</string>
+  </keywords>
+  <srs>EPSG:404000</srs>
+  <nativeBoundingBox>
+    <minx>116.603394</minx>
+    <maxx>116.759605</maxx>
+    <miny>-1.043643</miny>
+    <maxy>-0.899812</maxy>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>116.603394</minx>
+    <maxx>116.759605</maxx>
+    <miny>-1.043643</miny>
+    <maxy>-0.899812</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <metadata>
+    <entry key="JDBC_VIRTUAL_TABLE">
+      <virtualTable>
+        <name>v_wifi_coverage</name>
+        <sql>SELECT&#xd;
+  gid AS id,&#xd;
+  geom&#xd;
+FROM v_wifi_coverage
+</sql>
+        <escapeSql>false</escapeSql>
+      </virtualTable>
+    </entry>
+    <entry key="cachingEnabled">false</entry>
+  </metadata>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl-72bef690:19c483c603a:-7ffe</id>
+  </store>
+  <serviceConfiguration>false</serviceConfiguration>
+  <simpleConversionEnabled>false</simpleConversionEnabled>
+  <internationalTitle/>
+  <internationalAbstract/>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+  <padWithZeros>false</padWithZeros>
+  <forcedDecimal>false</forcedDecimal>
+  <overridingServiceSRS>false</overridingServiceSRS>
+  <skipNumberMatched>false</skipNumberMatched>
+  <circularArcPresent>false</circularArcPresent>
+</featureType>

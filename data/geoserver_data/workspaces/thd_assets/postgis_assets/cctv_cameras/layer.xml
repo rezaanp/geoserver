@@ -1,0 +1,16 @@
+<layer>
+  <name>cctv_cameras</name>
+  <id>LayerInfoImpl--66ab81fb:19c54a0cad5:-6dd0</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--570ae188:124761b8d78:-7fdf</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--66ab81fb:19c54a0cad5:-6dd1</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2026-02-13 02:15:44.644 UTC</dateCreated>
+</layer>

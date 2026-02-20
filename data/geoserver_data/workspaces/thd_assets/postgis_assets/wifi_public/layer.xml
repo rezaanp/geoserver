@@ -1,0 +1,16 @@
+<layer>
+  <name>wifi_public</name>
+  <id>LayerInfoImpl-e88f2fe:19c4fa41e79:-7ffd</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--570ae188:124761b8d78:-7fdf</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-e88f2fe:19c4fa41e79:-7ffe</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2026-02-12 02:18:23.139 UTC</dateCreated>
+</layer>
