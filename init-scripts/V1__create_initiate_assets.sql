@@ -3,12 +3,12 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS postgis_topology;
 
 -- Schema terpusat
-CREATE SCHEMA IF NOT EXISTS city_assets AUTHORIZATION geoadmin;
+CREATE SCHEMA IF NOT EXISTS thd_assets AUTHORIZATION geoadmin;
 
 -- ===== TABEL TITIK =====
 
 -- E-Kiosk
-CREATE TABLE city_assets.ekiosks (
+CREATE TABLE thd_assets.ekiosks (
     id SERIAL PRIMARY KEY,
     asset_id VARCHAR(50) UNIQUE NOT NULL,
     geom GEOMETRY(POINT, 4326) NOT NULL,
@@ -20,10 +20,10 @@ CREATE TABLE city_assets.ekiosks (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
-CREATE INDEX idx_ekiosks_geom ON city_assets.ekiosks USING GIST(geom);
+CREATE INDEX idx_ekiosks_geom ON thd_assets.ekiosks USING GIST(geom);
 
 -- WiFi Public (dengan radius dinamis)
-CREATE TABLE city_assets.wifi_public (
+CREATE TABLE thd_assets.wifi_public (
     id SERIAL PRIMARY KEY,
     asset_id VARCHAR(50) UNIQUE NOT NULL,
     geom GEOMETRY(POINT, 4326) NOT NULL,
@@ -37,10 +37,10 @@ CREATE TABLE city_assets.wifi_public (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
-CREATE INDEX idx_wifi_public_geom ON city_assets.wifi_public USING GIST(geom);
+CREATE INDEX idx_wifi_public_geom ON thd_assets.wifi_public USING GIST(geom);
 
 -- CCTV
-CREATE TABLE city_assets.cctv_cameras (
+CREATE TABLE thd_assets.cctv_cameras (
     id SERIAL PRIMARY KEY,
     asset_id VARCHAR(50) UNIQUE NOT NULL,
     geom GEOMETRY(POINT, 4326) NOT NULL,
@@ -61,4 +61,4 @@ CREATE TABLE city_assets.cctv_cameras (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
-CREATE INDEX idx_cctv_geom ON city_assets.cctv_cameras USING GIST(geom);
+CREATE INDEX idx_cctv_geom ON thd_assets.cctv_cameras USING GIST(geom);

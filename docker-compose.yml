@@ -3,8 +3,8 @@ services:
     image: postgis/postgis:15-3.4
     container_name: postgis
     environment:
-      - POSTGRES_DB=spatial_assets
-      - POSTGRES_USER=geoadmin
+      - POSTGRES_DB=oikn
+      - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=SecurePass123!
     volumes:
       - ./data/postgis:/var/lib/postgresql/data

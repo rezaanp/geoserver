@@ -6,7 +6,7 @@ SELECT
     geom::geography,
     coverage_radius_m
   )::geometry(Polygon, 4326) AS geom
-FROM city_assets.wifi_public
+FROM thd_assets.wifi_public
 WHERE coverage_radius_m IS NOT NULL
   AND coverage_radius_m > 0;
 
@@ -19,7 +19,7 @@ WITH base AS (
     radians(c.azimuth_deg::double precision) AS azimuth,
     radians(c.field_of_view_deg::double precision) AS fov,
     c.field_of_view_deg
-  FROM city_assets.cctv_cameras c
+  FROM thd_assets.cctv_cameras c
   WHERE
     c.geom IS NOT NULL
     AND c.coverage_radius_m > 0
