@@ -4,8 +4,8 @@ services:
     container_name: postgis
     environment:
       - POSTGRES_DB=oikn
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=SecurePass123!
+      - POSTGRES_USER=geoadmin
+      - POSTGRES_PASSWORD=SecurePass123
     volumes:
       - ./data/postgis:/var/lib/postgresql/data
       - ./init-scripts:/docker-entrypoint-initdb.d:ro
