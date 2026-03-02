@@ -8,7 +8,7 @@ WITH base AS (
     radians(ap.azimuth_deg::double precision) AS azimuth,
     radians(ap.field_of_view_deg::double precision) AS fov,
     ap.field_of_view_deg
-  FROM thd_assets.access_points ap
+  FROM infrasrtucture.access_points ap
   WHERE
     ap.geom IS NOT NULL
     AND ap.coverage_radius_m > 0
@@ -90,7 +90,7 @@ WITH base AS (
     radians(sp.azimuth_deg::double precision) AS azimuth,
     radians(sp.field_of_view_deg::double precision) AS fov,
     sp.field_of_view_deg
-  FROM thd_assets.smart_poles sp
+  FROM infrasrtucture.smart_poles sp
   WHERE
     sp.geom IS NOT NULL
     AND sp.coverage_radius_m > 0
@@ -172,7 +172,7 @@ WITH base AS (
     radians(t.azimuth_deg::double precision) AS azimuth,
     radians(t.field_of_view_deg::double precision) AS fov,
     t.field_of_view_deg
-  FROM thd_assets.towers t
+  FROM infrasrtucture.towers t
   WHERE
     t.geom IS NOT NULL
     AND t.coverage_radius_m > 0
@@ -254,7 +254,7 @@ WITH base AS (
     radians(c.azimuth_deg::double precision) AS azimuth,
     radians(c.field_of_view_deg::double precision) AS fov,
     c.field_of_view_deg
-  FROM thd_assets.cctv_cameras c
+  FROM infrasrtucture.cctv_cameras c
   WHERE
     c.geom IS NOT NULL
     AND c.coverage_radius_m > 0
