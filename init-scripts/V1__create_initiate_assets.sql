@@ -13,7 +13,7 @@ CREATE TABLE infrasrtucture.access_points (
     asset_id VARCHAR(50) UNIQUE NOT NULL,
     geom GEOMETRY(POINT, 4326) NOT NULL,
     location_name VARCHAR(80) NOT NULL,
-    persil_number VARCHAR(50),
+    area_name VARCHAR(50),
     deployment_type VARCHAR(20) CHECK (deployment_type IN ('EKSISTING', 'PLAN')),
     
     -- Spesifikasi Teknis
@@ -49,7 +49,7 @@ CREATE TABLE infrasrtucture.smart_poles (
     asset_id VARCHAR(50) UNIQUE NOT NULL,
     geom GEOMETRY(POINT, 4326) NOT NULL,
     location_name VARCHAR(80) NOT NULL,
-    persil_number VARCHAR(50),
+    area_name VARCHAR(50),
     deployment_type VARCHAR(20) CHECK (deployment_type IN ('EKSISTING', 'PLAN')),
     
     -- Konektivitas & Jaringan
@@ -91,7 +91,7 @@ CREATE TABLE infrasrtucture.manholes (
     asset_id VARCHAR(50) UNIQUE NOT NULL,
     geom GEOMETRY(POINT, 4326) NOT NULL,
     location_name VARCHAR(80) NOT NULL,
-    persil_number VARCHAR(50),
+    area_name VARCHAR(50),
     -- Hole biasanya tidak memiliki status plan/eksisting yang kompleks, tapi distandarisasi
     deployment_type VARCHAR(20) CHECK (deployment_type IN ('EKSISTING', 'PLAN')),
     
@@ -117,7 +117,7 @@ CREATE TABLE infrasrtucture.telco_active_equipment (
     asset_id VARCHAR(50) UNIQUE NOT NULL,
     geom GEOMETRY(POINT, 4326) NOT NULL,
     location_name VARCHAR(80) NOT NULL,
-    persil_number VARCHAR(50),
+    area_name VARCHAR(50),
     deployment_type VARCHAR(20) CHECK (deployment_type IN ('EKSISTING', 'PLAN')),
     
     -- Spesifikasi Alat
@@ -144,7 +144,7 @@ CREATE TABLE infrasrtucture.towers (
     asset_id VARCHAR(50) UNIQUE NOT NULL,
     geom GEOMETRY(POINT, 4326) NOT NULL,
     location_name VARCHAR(80) NOT NULL,
-    persil_number VARCHAR(50),
+    area_name VARCHAR(50),
     deployment_type VARCHAR(20) CHECK (deployment_type IN ('EKSISTING', 'PLAN')),
     
     -- Spesifikasi Tower
@@ -178,7 +178,7 @@ CREATE TABLE infrasrtucture.cable_routes (
     asset_id VARCHAR(50) UNIQUE NOT NULL,
     geom GEOMETRY(LINESTRING, 4326) NOT NULL,
     location_name VARCHAR(80) NOT NULL, -- Nama Rute
-    persil_number VARCHAR(50),
+    area_name VARCHAR(50),
     deployment_type VARCHAR(20) CHECK (deployment_type IN ('EKSISTING', 'PLAN')),
     
     -- Spesifikasi Kabel
@@ -208,7 +208,7 @@ CREATE TABLE infrasrtucture.cctv_cameras (
     asset_id VARCHAR(50) UNIQUE NOT NULL,
     geom GEOMETRY(POINT, 4326) NOT NULL,
     location_name VARCHAR(80) NOT NULL,
-    persil_number VARCHAR(50),
+    area_name VARCHAR(50),
     deployment_type VARCHAR(20) CHECK (deployment_type IN ('EKSISTING', 'PLAN')),
     
     camera_type VARCHAR(80) NOT NULL,
@@ -233,3 +233,22 @@ CREATE TABLE infrasrtucture.cctv_cameras (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 CREATE INDEX idx_cctv_geom ON infrasrtucture.cctv_cameras USING GIST(geom);
+
+CREATE TABLE infrasrtucture.ekiosks (
+    id SERIAL PRIMARY KEY,
+    asset_id VARCHAR(50) UNIQUE NOT NULL,
+    geom GEOMETRY(POINT, 4326) NOT NULL,
+    location_name VARCHAR(80) NOT NULL, 
+    area_name VARCHAR(50),
+    connection_type VARCHAR(30),
+    owner VARCHAR(30),
+    
+    serial_number VARCHAR(100),
+    status VARCHAR(20) DEFAULT 'ACTIVE' CHECK (status IN ('ACTIVE', 'INACTIVE', 'MAINTENANCE')),
+    description TEXT,
+
+    installation_date DATE DEFAULT CURRENT_DATE,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX idx_ekiosks_geom ON infrasrtucture.ekiosks USING GIST(geom);

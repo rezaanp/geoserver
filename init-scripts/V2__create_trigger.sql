@@ -15,3 +15,4 @@ CREATE TRIGGER update_tae_updated_at BEFORE UPDATE ON infrasrtucture.telco_activ
 CREATE TRIGGER update_tower_updated_at BEFORE UPDATE ON infrasrtucture.towers FOR EACH ROW EXECUTE FUNCTION infrasrtucture.update_updated_at_column();
 CREATE TRIGGER update_cr_updated_at BEFORE UPDATE ON infrasrtucture.cable_routes FOR EACH ROW EXECUTE FUNCTION infrasrtucture.update_updated_at_column();
 CREATE TRIGGER update_cctv_updated_at BEFORE UPDATE ON infrasrtucture.cctv_cameras FOR EACH ROW EXECUTE FUNCTION infrasrtucture.update_updated_at_column();
+CREATE TRIGGER update_ek_updated_at BEFORE UPDATE ON infrasrtucture.ekiosks FOR EACH ROW EXECUTE FUNCTION infrasrtucture.update_updated_at_column();
