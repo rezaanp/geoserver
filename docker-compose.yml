@@ -2,21 +2,21 @@ services:
 
   postgis:
     image: postgis/postgis:15-3.4
-    container_name: postgis
+    container_name: postgis_new
     env_file:
       - .env
     volumes:
       - ./data/postgis:/var/lib/postgresql/data
     ports:
-      - "5433:5432"  # ⚠️ Diubah: 5432 → 5433
+      - "5433:5432"  # ✅ Ekspos ke port 5433 di host (opsional)
     networks:
-      - geonet
+      - geonet_new
     restart: unless-stopped
 
 
   geoserver:
     image: docker.osgeo.org/geoserver:2.24.2
-    container_name: geoserver
+    container_name: geoserver_new
     env_file:
       - .env
     environment:
@@ -24,52 +24,53 @@ services:
       TZ: Asia/Jakarta
     volumes:
       - ./data/geoserver:/opt/geoserver_data
-    ports:
-      - "8082:8080"  # ✅ Opsional: untuk akses direct ke GeoServer
+    # ports:
+    #   - "8082:8080"  # ✅ Opsional: uncomment jika butuh akses direct
     depends_on:
       - postgis
     networks:
-      - geonet
+      - geonet_new
     restart: unless-stopped
 
 
   geonode:
     image: geonode/geonode-project:4.1
-    container_name: geonode
+    container_name: geonode_new
     env_file:
       - .env
     environment:
       - MONITORING_ENABLED=False
       - DOCKER_HOST=unix:///var/run/docker.sock
-      - SITEURL=http://localhost:8081/geonode/  # ⚠️ Sesuaikan dengan port nginx baru
-      - GEOSERVER_PUBLIC_LOCATION=http://localhost:8081/geoserver/  # ⚠️ Sesuaikan
+      - SITEURL=http://localhost:8081/geonode/  # ⚠️ Sesuaikan port nginx
+      - GEOSERVER_PUBLIC_LOCATION=http://localhost:8081/geoserver/
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - postgis
       - geoserver
     networks:
-      - geonet
+      - geonet_new
     restart: unless-stopped
-    ports:
-      - "8083:8000"  # ✅ Opsional: untuk akses direct ke GeoNode
+    # ports:
+    #   - "8083:8000"  # ✅ Opsional: uncomment jika butuh akses direct
 
 
   nginx:
     image: nginx:stable
-    container_name: geostack-nginx
+    container_name: geostack-nginx-new
     ports:
-      - "8081:80"  # ⚠️ Diubah: 80 → 8081 (port akses utama)
+      - "8081:80"   # ⚠️ Ganti 80→8081 (karena 80 sudah dipakai)
+      # - "8443:443" # ✅ Opsional: jika butuh HTTPS di port berbeda
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - geonode
       - geoserver
     networks:
-      - geonet
+      - geonet_new
     restart: unless-stopped
 
 
 networks:
-  geonet:
+  geonet_new:  # ⚠️ Ganti nama network agar terisolasi dari stack existing
     driver: bridge
