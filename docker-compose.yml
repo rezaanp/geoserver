@@ -1,35 +1,75 @@
 services:
+
   postgis:
     image: postgis/postgis:15-3.4
     container_name: postgis
-    environment:
-      - POSTGRES_DB=oikn
-      - POSTGRES_USER=geoadmin
-      - POSTGRES_PASSWORD=SecurePass123
+    env_file:
+      - .env
     volumes:
       - ./data/postgis:/var/lib/postgresql/data
-      - ./init-scripts:/docker-entrypoint-initdb.d:ro
     ports:
-      - "5432:5432"
+      - "5433:5432"  # ⚠️ Diubah: 5432 → 5433
     networks:
-      - geospatial-net
+      - geonet
     restart: unless-stopped
+
 
   geoserver:
     image: docker.osgeo.org/geoserver:2.24.2
     container_name: geoserver
-    depends_on:
-      - postgis
+    env_file:
+      - .env
     environment:
+      PROXY_BASE_URL: ${GEOSERVER_PROXY_URL}
       TZ: Asia/Jakarta
     volumes:
-      - ./data/geoserver_data:/opt/geoserver_data
+      - ./data/geoserver:/opt/geoserver_data
     ports:
-      - "8080:8080"
+      - "8082:8080"  # ✅ Opsional: untuk akses direct ke GeoServer
+    depends_on:
+      - postgis
     networks:
-      - geospatial-net
+      - geonet
     restart: unless-stopped
 
+
+  geonode:
+    image: geonode/geonode-project:4.1
+    container_name: geonode
+    env_file:
+      - .env
+    environment:
+      - MONITORING_ENABLED=False
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - SITEURL=http://localhost:8081/geonode/  # ⚠️ Sesuaikan dengan port nginx baru
+      - GEOSERVER_PUBLIC_LOCATION=http://localhost:8081/geoserver/  # ⚠️ Sesuaikan
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - postgis
+      - geoserver
+    networks:
+      - geonet
+    restart: unless-stopped
+    ports:
+      - "8083:8000"  # ✅ Opsional: untuk akses direct ke GeoNode
+
+
+  nginx:
+    image: nginx:stable
+    container_name: geostack-nginx
+    ports:
+      - "8081:80"  # ⚠️ Diubah: 80 → 8081 (port akses utama)
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - geonode
+      - geoserver
+    networks:
+      - geonet
+    restart: unless-stopped
+
+
 networks:
-  geospatial-net:
+  geonet:
     driver: bridge
